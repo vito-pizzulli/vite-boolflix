@@ -13,6 +13,7 @@
         <span v-else-if="(card.original_language === 'ko')" class="fi fi-kr"></span>
         <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
         <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
+        <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
         <img v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
         <span v-else :class="'fi fi-' + card.original_language"></span>
 
