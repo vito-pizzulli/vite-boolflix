@@ -1,13 +1,18 @@
 <template>
     <main>
         <h1>I'm the Main</h1>
+        <AppContent />
     </main>
 </template>
 
 <script>
+import AppContent from './AppContent.vue';
 export default {
-    name: 'AppMain'
+    name: 'AppMain',
 
+    components: {
+        AppContent
+    }
 }
 </script>
 
