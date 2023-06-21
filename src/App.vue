@@ -1,6 +1,6 @@
 <template>
     <AppHeader 
-      @startSearch="getMovieListByQuery()"
+      @startSearch="getMovieListByQuery"
     />
     <AppMain />
 </template>
@@ -25,8 +25,8 @@ export default {
     },
 
     methods: {
-        getMovieListByQuery() {
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + store.searchQuery)
+        getMovieListByQuery(searchQuery) {
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + searchQuery)
                     .then(function (response) {
                         console.log(response.data.results);
                         store.apiCall = response.data.results;

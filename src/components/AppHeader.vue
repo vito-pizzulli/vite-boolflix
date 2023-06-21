@@ -2,20 +2,19 @@
     <header>
         <div id="app-searchbar">
             <h1>I'm the Header</h1>
-            <input type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')">
-            <button @click="$emit('startSearch')">Search</button>
+            <input type="text" v-model="searchQuery" @keyup.enter="$emit('startSearch', searchQuery)">
+            <button @click="$emit('startSearch', searchQuery)">Search</button>
     </div>
     </header>
 </template>
 
 <script>
-import { store } from '../store';
 export default {
     name: 'AppHeader',
 
     data() {
         return {
-            store
+            searchQuery: ''
         }
     }
 }
