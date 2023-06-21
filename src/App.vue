@@ -45,13 +45,7 @@ export default {
                       console.log(error);
                   })
       }
-  },
-
-  /* computed: {
-    sortItemsByPopularity() {
-      return store.apiCall.sort((a, b) => b["popularity"] - a["popularity"]);
-    }
-  } */
+  }
 }
 </script>
 
