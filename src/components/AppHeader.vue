@@ -1,17 +1,22 @@
 <template>
     <header>
-        <h1>I'm the Header</h1>
-        <AppSearchbar />
+        <div id="app-searchbar">
+            <h1>I'm the Header</h1>
+            <input type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')">
+            <button @click="$emit('startSearch')">Search</button>
+    </div>
     </header>
 </template>
 
 <script>
-import AppSearchbar from './AppSearchbar.vue';
+import { store } from '../store';
 export default {
     name: 'AppHeader',
-    
-    components: {
-        AppSearchbar
+
+    data() {
+        return {
+            store
+        }
     }
 }
 </script>
