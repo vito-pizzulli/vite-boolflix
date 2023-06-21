@@ -6,7 +6,14 @@
 
 <script>
 export default {
-    name: 'AppCard'
+    name: 'AppCard',
+
+    props: {
+        title,
+        originalTitle,
+        language,
+        rating
+    }
 }
 </script>
 
