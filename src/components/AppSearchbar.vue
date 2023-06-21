@@ -1,12 +1,19 @@
 <template>
     <div id="app-searchbar">
-        <h1>I'm the Searchbar</h1>
+        <input type="text" v-model="store.searchQuery">
+        <button>Search</button>
     </div>
 </template>
 <script>
+import { store } from '../store';
 export default {
-    name: 'AppSearchbar'
-    
+    name: 'AppSearchbar',
+
+    data() {
+        return {
+            store
+        }
+    }
 }
 </script>
 <style lang="scss">
