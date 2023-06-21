@@ -1,6 +1,9 @@
 <template>
     <div id="app-card">
-        <h1>I'm a Card</h1>
+        <h1>{{ card.title }}</h1>
+        <h2>{{ card.original_title }}</h2>
+        <h3>{{ card.original_language }}</h3>
+        <h4>{{ card.vote_average }}</h4>
     </div>
 </template>
 
@@ -9,10 +12,7 @@ export default {
     name: 'AppCard',
 
     props: {
-        title,
-        originalTitle,
-        language,
-        rating
+        card: Object
     }
 }
 </script>
