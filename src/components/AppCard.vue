@@ -21,7 +21,7 @@
             <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
             <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
             <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
-            <span v-else :class="'fi fi-' + card.original_language"></span><br>
+            <span v-else :class="'fi fi-' + card.original_language"></span>
 
             <!-- Rating displayed in stars (1 to 5) -->
             <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
@@ -55,7 +55,7 @@ export default {
         margin: 1rem;
         background-color: black;
         color: white;
-            overflow-y: scroll;
+        overflow-y: hidden;
 
         img.poster {
             position: absolute;
@@ -75,19 +75,27 @@ export default {
             }
 
             h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             }
 
             h2 {
-                font-size: 1rem;
+                font-size: .9rem;
             }
 
             h1, h2, span, p {
                 margin: .3rem 0;
             }
 
+            p {
+                font-size: .79rem;
+            }
+
             span.star {
                 color: goldenrod;
+            }
+
+            span.fi {
+                margin-right: 1rem;
             }
         }
     }
