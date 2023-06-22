@@ -1,5 +1,5 @@
 <template>
-    <div id="app-card" @click="mediaPreviewVisible = !mediaPreviewVisible">
+    <div id="app-card" @click="toggleMediaPreview">
 
         <!-- Poster and No Poster Found images  -->
         <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image" class="poster">
@@ -35,6 +35,7 @@
     <AppMediaPreview v-if="mediaPreviewVisible"
         :card="card"
         :mediaPreviewVisible="mediaPreviewVisible"
+        @closeMediaPreview="toggleMediaPreview"
     />
 </template>
 
@@ -56,6 +57,12 @@ export default {
 
     props: {
         card: Object
+    },
+
+    methods: {
+        toggleMediaPreview() {
+            this.mediaPreviewVisible = !this.mediaPreviewVisible
+        }
     }
 }
 </script>
