@@ -1,29 +1,35 @@
 <template>
     <div id="app-card">
+
         <!-- Poster and No Poster Found images  -->
-        <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image">
-        <img v-else src="../../public/no_image.png" alt="No Poster Found Image">
+        <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image" class="poster">
+        <img v-else src="../../public/no_image.png" alt="No Poster Found Image" class="poster">
 
-        <!-- Property "title" for Movies, "name" for TV Series -->
-        <h1 v-if="card.title">{{ card.title }}</h1>
-        <h1 v-else>{{ card.name }}</h1>
+        <div class="element-info">
+            <!-- Property "title" for Movies, "name" for TV Series -->
+            <h1 v-if="card.title">{{ card.title }}</h1>
+            <h1 v-else>{{ card.name }}</h1>
 
-        <!-- Property "original_title" for Movies, "original_name" for TV Series -->
-        <h2 v-if="card.original_title">{{ card.original_title }}</h2>
-        <h2 v-else>{{ card.original_name }}</h2>
+            <!-- Property "original_title" for Movies, "original_name" for TV Series -->
+            <h2 v-if="card.original_title">{{ card.original_title }}</h2>
+            <h2 v-else>{{ card.original_name }}</h2>
 
-        <!-- Language flags with correction if missing or value slightly different -->
-        <span v-if="(card.original_language === 'en')" class="fi fi-gb"></span>
-        <span v-else-if="(card.original_language === 'ko')" class="fi fi-kr"></span>
-        <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
-        <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
-        <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
-        <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
-        <span v-else :class="'fi fi-' + card.original_language"></span><br>
+            <!-- Language flags with correction if missing or value slightly different -->
+            <span v-if="(card.original_language === 'en')" class="fi fi-gb"></span>
+            <span v-else-if="(card.original_language === 'ko')" class="fi fi-kr"></span>
+            <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
+            <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
+            <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
+            <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
+            <span v-else :class="'fi fi-' + card.original_language"></span><br>
 
-        <!-- Rating displayed in stars (1 to 5) -->
-        <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
-        <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
+            <!-- Rating displayed in stars (1 to 5) -->
+            <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
+            <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
+
+            <!-- Overview -->
+            <p>{{ card.overview }}</p>
+        </div>
     </div>
 </template>
 
@@ -42,16 +48,47 @@ export default {
     @use '../styles/partials/variables' as *;
     @use '../styles/partials/mixins' as *;
 
-    #app-card {
-        padding: 1rem;
-        border: 1px solid black;
+    div#app-card {
+        position: relative;
+        width: 342px;
+        height: 513px;
+        margin: 1rem;
+        background-color: black;
+        color: white;
+            overflow-y: scroll;
 
-        img.flag-error {
-            width: 25px;
+        img.poster {
+            position: absolute;
+            z-index: 1;
+            transition: all .5s ease;
+
+            &:hover {
+                opacity: 0;
+            }
         }
 
-        span.star {
-            color: goldenrod;
+        div.element-info {
+            padding: 1rem;
+
+            img.flag-error {
+                width: 25px;
+            }
+
+            h1 {
+            font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+
+            h1, h2, span, p {
+                margin: .3rem 0;
+            }
+
+            span.star {
+                color: goldenrod;
+            }
         }
     }
 </style>

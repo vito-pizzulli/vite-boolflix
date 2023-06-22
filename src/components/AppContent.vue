@@ -29,8 +29,8 @@ export default {
     @use '../styles/partials/variables' as *;
     @use '../styles/partials/mixins' as *;
 
-    #app-content {
+    div#app-content {
+        @include flex(row, start, center, wrap);
         padding: 1rem;
-        border: 1px solid black;
     }
 </style>
