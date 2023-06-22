@@ -1,5 +1,5 @@
 <template>
-    <div id="app-card" @click="store.mediaPreviewVisible = !store.mediaPreviewVisible">
+    <div id="app-card" @click="mediaPreviewVisible = !mediaPreviewVisible">
 
         <!-- Poster and No Poster Found images  -->
         <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image" class="poster">
@@ -32,21 +32,21 @@
         </div>
     </div>
 
-    <AppMediaPreview v-if="store.mediaPreviewVisible"
+    <AppMediaPreview v-if="mediaPreviewVisible"
         :card="card"
+        :mediaPreviewVisible="mediaPreviewVisible"
     />
 </template>
 
 <script>
 import AppMediaPreview from './AppMediaPreview.vue';
-import { store } from '../store';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 export default {
     name: 'AppCard',
 
     data() {
         return {
-            store
+            mediaPreviewVisible: false
         }
     },
 
