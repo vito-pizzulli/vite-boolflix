@@ -78,6 +78,7 @@ export default {
         background-color: black;
         color: white;
         overflow-y: hidden;
+        border-radius: 10px;
 
         img.poster {
             position: absolute;
