@@ -21,7 +21,7 @@
         <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
         <span v-else :class="'fi fi-' + card.original_language"></span><br>
 
-        <!-- Rating 1 to 5 rounded up -->
+        <!-- Rating displayed in stars (1 to 5) -->
         <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
         <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
     </div>
