@@ -31,6 +31,7 @@ export default {
             axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&query=' + store.searchQuery)
                     .then(function (movieResponse) {
                         store.searchComplete = false;
+                        store.noResults = false;
                         console.log(movieResponse.data.results);
                         store.apiCall = movieResponse.data.results;
                     })
