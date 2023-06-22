@@ -4,7 +4,7 @@
             :card="card"
         />
     </div>
-    <h2 v-if="store.noResults">No results for your search with "{{ store.searchedQuery }}".</h2>
+    <h2 v-if="store.noResults">Nessun risultato per la tua ricerca di "{{ store.searchedQuery }}".</h2>
 </template>
 
 <script>
@@ -31,6 +31,11 @@ export default {
 
     div#app-content {
         @include flex(row, start, center, wrap);
+        padding: 1rem;
+    }
+
+    h2 {
+        color: white;
         padding: 1rem;
     }
 </style>
