@@ -1,5 +1,6 @@
 <template>
     <div id="app-card">
+        <img :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Movie Poster">
         <!-- Property "title" for Movies, "name" for TV Series -->
         <h1 v-if="card.title">{{ card.title }}</h1>
         <h1 v-else>{{ card.name }}</h1>
@@ -14,7 +15,7 @@
         <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
         <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
         <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
-        <img v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
+        <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
         <span v-else :class="'fi fi-' + card.original_language"></span>
 
         <!-- Rating -->
@@ -41,7 +42,7 @@ export default {
         padding: 1rem;
         border: 1px solid black;
 
-        img {
+        img.flag-error {
             width: 25px;
         }
     }
