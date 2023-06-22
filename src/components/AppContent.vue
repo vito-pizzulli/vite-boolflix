@@ -1,6 +1,6 @@
 <template>
     <div id="app-content" v-if="store.apiCall.length > 0">
-        <AppCard v-for="card in store.apiCall" v-if="store.searchComplete"
+        <AppCard v-for="(card, index) in store.apiCall" v-if="store.searchComplete"
             :card="card"
         />
     </div>
