@@ -34,7 +34,6 @@
 
     <AppMediaPreview v-if="mediaPreviewVisible"
         :card="card"
-        :mediaPreviewVisible="mediaPreviewVisible"
         @closeMediaPreview="toggleMediaPreview"
     />
 </template>
