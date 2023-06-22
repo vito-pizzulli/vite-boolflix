@@ -1,6 +1,9 @@
 <template>
     <div id="app-card">
-        <img :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Movie Poster">
+        <!-- Poster and No Poster Found images  -->
+        <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image">
+        <img v-else src="../../public/no_image.png" alt="No Poster Found Image">
+
         <!-- Property "title" for Movies, "name" for TV Series -->
         <h1 v-if="card.title">{{ card.title }}</h1>
         <h1 v-else>{{ card.name }}</h1>
@@ -9,7 +12,7 @@
         <h2 v-if="card.original_title">{{ card.original_title }}</h2>
         <h2 v-else>{{ card.original_name }}</h2>
 
-        <!-- Flags with correction if missing or value slightly different -->
+        <!-- Language flags with correction if missing or value slightly different -->
         <span v-if="(card.original_language === 'en')" class="fi fi-gb"></span>
         <span v-else-if="(card.original_language === 'ko')" class="fi fi-kr"></span>
         <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
