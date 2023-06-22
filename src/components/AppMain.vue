@@ -1,6 +1,5 @@
 <template>
     <main>
-        <h1>I'm the Main</h1>
         <AppContent />
     </main>
 </template>
