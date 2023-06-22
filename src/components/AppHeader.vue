@@ -50,6 +50,9 @@ export default {
         background-color: black;
         color: white;
         padding: 0 3rem;
+        position: fixed;
+        width: 100%;
+        z-index: 2;
 
         div.header-half {
             @include flex(row, center, center, no-wrap);
