@@ -5,6 +5,7 @@ const store = reactive({
     searchQuery: '',
     searchedQuery: '',
     noResults: false,
+    searchComplete: false,
     navbarLinks: [
         {
             text: 'Home',
