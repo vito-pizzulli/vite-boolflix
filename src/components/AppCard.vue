@@ -19,10 +19,11 @@
         <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
         <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
         <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
-        <span v-else :class="'fi fi-' + card.original_language"></span>
+        <span v-else :class="'fi fi-' + card.original_language"></span><br>
 
         <!-- Rating 1 to 5 rounded up -->
-        <h3>{{ Math.ceil(card.vote_average / 2) }}</h3>
+        <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
+        <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
     </div>
 </template>
 
@@ -47,6 +48,10 @@ export default {
 
         img.flag-error {
             width: 25px;
+        }
+
+        span.star {
+            color: goldenrod;
         }
     }
 </style>
