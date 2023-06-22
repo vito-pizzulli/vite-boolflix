@@ -20,7 +20,9 @@ export default {
     @use '../styles/partials/mixins' as *;
 
     main {
-        padding: 1rem;
-        border: 1px solid black;
+        padding-top: 5rem;
+        background-color: #141414;
+        height: 100vh;
+        overflow-y: scroll;
     }
 </style>
