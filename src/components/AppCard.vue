@@ -3,7 +3,7 @@
 
         <!-- Poster and No Poster Found images  -->
         <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image" class="poster">
-        <img v-else src="../../public/no_image.png" alt="No Poster Found Image" class="poster">
+        <img v-else src="/public/no_image.png" alt="No Poster Found Image" class="poster">
 
         <div class="element-info">
             <!-- Property "title" for Movies, "name" for TV Series -->

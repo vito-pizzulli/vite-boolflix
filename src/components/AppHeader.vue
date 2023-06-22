@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header-half">
-            <img src="../../public/netflix_logo.png" alt="Netflix Logo">
+            <img src="/netflix_logo.png" alt="Netflix Logo">
             <nav id="header-navbar">
                 <ul>
                     <li v-for="link in store.navbarLinks"><a href="link.link">{{ link.text }}</a></li>
@@ -14,7 +14,7 @@
                 <input v-if="(this.inputVisible === true)" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
                 <button v-if="(this.inputVisible === true)" @click="inputToggle()" class="cross-button"><font-awesome-icon icon="xmark" /></button>
                 <span class="icon"><font-awesome-icon icon="bell" /></span>
-                <img src="../../public/profile_pic.png" alt="Profile Pic">
+                <img src="/profile_pic.png" alt="Profile Pic">
                 <span class="icon"><font-awesome-icon icon="caret-down" /></span>
             </div>
         </div>
