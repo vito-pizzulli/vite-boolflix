@@ -1,5 +1,5 @@
 <template>
-    <div id="app-card">
+    <div id="app-card" @click="mediaPreviewVisible = !mediaPreviewVisible">
 
         <!-- Poster and No Poster Found images  -->
         <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342/' + card.poster_path" alt="Poster Image" class="poster">
@@ -31,12 +31,27 @@
             <p>{{ card.overview }}</p>
         </div>
     </div>
+
+    <AppMediaPreview v-if="mediaPreviewVisible"
+        :card="card"
+    />
 </template>
 
 <script>
+import AppMediaPreview from './AppMediaPreview.vue';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 export default {
     name: 'AppCard',
+
+    data() {
+        return {
+            mediaPreviewVisible: false
+        }
+    },
+
+    components: {
+        AppMediaPreview
+    },
 
     props: {
         card: Object
