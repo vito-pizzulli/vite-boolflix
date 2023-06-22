@@ -10,9 +10,9 @@
         </div>
         <div class="header-half">
             <div id="app-searchbar">
-                <button @click="inputToggle" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
-                <input v-if="this.inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
-                <button v-if="this.inputVisible" @click="inputToggle" class="cross-button"><font-awesome-icon icon="xmark" /></button>
+                <button @click="inputVisible = !inputVisible" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
+                <input v-if="inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
+                <button v-if="inputVisible" @click="inputVisible = !inputVisible" class="cross-button"><font-awesome-icon icon="xmark" /></button>
                 <span class="icon"><font-awesome-icon icon="bell" /></span>
                 <img src="/profile_pic.png" alt="Profile Pic">
                 <span class="icon"><font-awesome-icon icon="caret-down" /></span>
@@ -30,12 +30,6 @@ export default {
         return {
             store,
             inputVisible: false
-        }
-    },
-
-    methods: {
-        inputToggle() {
-            this.inputVisible = !this.inputVisible
         }
     }
 }
