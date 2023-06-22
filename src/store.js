@@ -11,23 +11,23 @@ const store = reactive({
             link: '#'
         },
         {
-            text: 'Series',
+            text: 'Serie TV',
             link: '#'
         },
         {
-            text: 'Films',
+            text: 'Film',
             link: '#'
         },
         {
-            text: 'New & Popular',
+            text: 'Nuovi e popolari',
             link: '#'
         },
         {
-            text: 'My List',
+            text: 'La mia lista',
             link: '#'
         },
         {
-            text: 'Browse By Languages',
+            text: 'Sfoglia per lingua',
             link: '#'
         }
     ]
