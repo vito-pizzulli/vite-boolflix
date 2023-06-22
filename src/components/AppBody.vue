@@ -28,7 +28,7 @@ export default {
 
     methods: {
         getContentListByQuery() {
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + store.searchQuery)
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&query=' + store.searchQuery)
                     .then(function (movieResponse) {
                         console.log(movieResponse.data.results);
                         store.apiCall = movieResponse.data.results;
@@ -37,7 +37,7 @@ export default {
                         console.log(error);
                     })
 
-            axios.get('https://api.themoviedb.org/3/search/tv?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + store.searchQuery)
+            axios.get('https://api.themoviedb.org/3/search/tv?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&query=' + store.searchQuery)
                     .then(function (tvResponse) {
                         console.log(tvResponse.data.results);
                         store.apiCall = store.apiCall.concat(tvResponse.data.results);
