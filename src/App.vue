@@ -25,8 +25,8 @@ export default {
   },
 
   methods: {
-      getContentListByQuery(searchQuery) {
-          axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + searchQuery)
+      getContentListByQuery() {
+          axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + store.searchQuery)
                   .then(function (movieResponse) {
                       console.log(movieResponse.data.results);
                       store.apiCall = movieResponse.data.results;
@@ -35,15 +35,21 @@ export default {
                       console.log(error);
                   })
 
-          axios.get('https://api.themoviedb.org/3/search/tv?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + searchQuery)
+          axios.get('https://api.themoviedb.org/3/search/tv?api_key=67aa46a4e4cc94fee02d3448ee99b726&query=' + store.searchQuery)
                   .then(function (tvResponse) {
                       console.log(tvResponse.data.results);
                       store.apiCall = store.apiCall.concat(tvResponse.data.results);
                       store.apiCall = store.apiCall.sort((a, b) => b["popularity"] - a["popularity"]);
+
+                      if (store.apiCall.length === 0) {
+                      store.noResults = true;
+                      }
                   })
                   .catch(function (error) {
                       console.log(error);
                   })
+
+                  store.searchedQuery = store.searchQuery
       }
   }
 }
