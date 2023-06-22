@@ -21,8 +21,8 @@
         <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
         <span v-else :class="'fi fi-' + card.original_language"></span>
 
-        <!-- Rating -->
-        <h3>{{ card.vote_average }}</h3>
+        <!-- Rating 1 to 5 rounded up -->
+        <h3>{{ Math.ceil(card.vote_average / 2) }}</h3>
     </div>
 </template>
 
