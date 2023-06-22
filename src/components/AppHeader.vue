@@ -4,7 +4,7 @@
             <img src="/netflix_logo.png" alt="Netflix Logo">
             <nav id="header-navbar">
                 <ul>
-                    <li v-for="link in store.navbarLinks"><a href="link.link">{{ link.text }}</a></li>
+                    <li v-for="link in store.navbarLinks"><a :href="link.link">{{ link.text }}</a></li>
                 </ul>
             </nav>
         </div>
