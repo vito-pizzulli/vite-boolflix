@@ -30,7 +30,6 @@ export default {
     methods: {
         getContentListByQuery() {
             store.searchComplete = false;
-            store.noResults = false;
             
             axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&include_adult=' + store.adultContent + '&query=' + store.searchQuery)
                 .then(function (movieResponse) {
@@ -46,10 +45,6 @@ export default {
                     store.apiCall = store.apiCall.sort((a, b) => b["popularity"] - a["popularity"]);
                     console.log(store.apiCall);
                     store.searchComplete = true;
-
-                    if (store.apiCall.length === 0) {
-                    store.noResults = true;
-                    }
                 })
                 .catch(function (error) {
                     console.log(error);

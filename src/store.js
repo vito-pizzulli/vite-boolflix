@@ -4,7 +4,6 @@ const store = reactive({
     apiCall: '',
     searchQuery: '',
     searchedQuery: '',
-    noResults: false,
     searchComplete: false,
     adultContent: false,
     mediaPreviewVisible: false,
