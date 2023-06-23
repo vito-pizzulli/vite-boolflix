@@ -108,8 +108,8 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 2
-        }
+        z-index: 1;
+    }
 
     div#app-media-preview {
         @include flex(column, center, center, no-wrap);
@@ -126,7 +126,7 @@ export default {
             border-radius: 10px;
             overflow: hidden;
             position: relative;
-            z-index: 2;
+            z-index: 1;
 
             div.element-backdrop {
                 position: relative;
@@ -195,7 +195,7 @@ export default {
                 div.blur-effect {
                     width: 110%;
                     height: 50px;
-                    transform: translate(-5%, 20px);
+                    transform: translate(-5px, 20px);
                     filter: blur(.5rem);
                     position: absolute;
                     background-color: #181818;
@@ -209,8 +209,8 @@ export default {
                 padding: 1rem 2rem 2rem;
 
                 div.element-info-left {
-                    width: 70%;
                     z-index: 1;
+                    width: 80%;
 
                     h3 {
                         margin-bottom: .5rem;
@@ -220,8 +220,9 @@ export default {
 
                 div.element-info-right {
                     z-index: 1;
-                    width: 30%;
-                    padding: 2rem;
+                    width: 20%;
+                    padding: 2rem 0;
+                    text-align: end;
 
                     h3 {
                         margin-bottom: .2rem;
@@ -230,7 +231,7 @@ export default {
 
                     span {
                         display: inline-block;
-                        margin-bottom: .8rem;
+                        margin-bottom: 1.5rem;
                     }
                 }
             }
