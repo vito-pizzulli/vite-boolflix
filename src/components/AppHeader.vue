@@ -46,7 +46,7 @@ export default {
         padding: 0 3rem;
         position: fixed;
         width: 100%;
-        z-index: 2;
+        z-index: 1;
 
         div.header-half {
             @include flex(row, center, center, no-wrap);
