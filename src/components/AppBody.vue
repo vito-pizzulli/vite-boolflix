@@ -59,6 +59,8 @@ export default {
         },
 
         getHomeContentList() {
+            store.searchComplete = false;
+            
             axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT')
                 .then(function (movieResponse) {
                     store.apiCall = movieResponse.data.results;
