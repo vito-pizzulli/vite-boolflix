@@ -42,10 +42,12 @@ export default {
         padding: 1rem;
     }
 
-    .cards-enter-active, .cards-leave-active {
+    .cards-enter-active,
+    .cards-leave-active {
         transition: all .3s;
     }
-    .cards-enter, .cards-leave-to {
+    .cards-enter-from,
+    .cards-leave-to {
         opacity: 0;
         transform: translateY(30px);
     }
