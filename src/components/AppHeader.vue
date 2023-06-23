@@ -11,23 +11,29 @@
         <div class="header-half">
             <div id="app-searchbar">
                 <button @click="inputVisible = !inputVisible, notificationsHide(), profileMenuHide()" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
-                <input v-if="inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
+                <Transition name="input-translate">
+                    <input v-if="inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
+                </Transition>
                 <button v-if="inputVisible" @click="inputVisible = !inputVisible, notificationsHide(), profileMenuHide()" class="cross-button"><font-awesome-icon icon="xmark" /></button>
                 <span class="icon" @click="notificationsVisible = !notificationsVisible, inputHide(), profileMenuHide()"><font-awesome-icon icon="bell" /></span>
-                <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible, inputHide(), profileMenuHide()">
-                    <span>Nessuna nuova notifica.</span>
-                </div>
+                <Transition name="notifications-translate">
+                    <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible, inputHide(), profileMenuHide()">
+                        <span>Nessuna nuova notifica.</span>
+                    </div>
+                </Transition>
+                <Transition name="profile-translate">
+                    <div v-if="profileMenuVisible" class="profile-menu">
+                        <ul>
+                            <li><font-awesome-icon icon="pencil" /> Gestisci i profili</li>
+                            <li><font-awesome-icon icon="user" /> Account</li>
+                            <li><font-awesome-icon icon="circle-question" /> Centro assistenza</li>
+                            <li v-if="!store.adultContent" @click="store.adultContent = !store.adultContent"><font-awesome-icon icon="ban" /> Contenuti per adulti: No</li>
+                            <li v-else @click="store.adultContent = !store.adultContent"><font-awesome-icon icon="ban" /> Contenuti per adulti: Si</li>
+                        </ul>
+                    </div>
+                </Transition>
                 <img src="/profile_pic.png" alt="Profile Pic" @click="profileMenuVisible = !profileMenuVisible, inputHide(), notificationsHide()">
                 <span class="icon" @click="profileMenuVisible = !profileMenuVisible, inputHide(), notificationsHide()"><font-awesome-icon icon="caret-down" /></span>
-                <div v-if="profileMenuVisible" class="profile-menu">
-                    <ul>
-                        <li><font-awesome-icon icon="pencil" /> Gestisci i profili</li>
-                        <li><font-awesome-icon icon="user" /> Account</li>
-                        <li><font-awesome-icon icon="circle-question" /> Centro assistenza</li>
-                        <li v-if="!store.adultContent" @click="store.adultContent = !store.adultContent"><font-awesome-icon icon="ban" /> Contenuti per adulti: No</li>
-                        <li v-else @click="store.adultContent = !store.adultContent"><font-awesome-icon icon="ban" /> Contenuti per adulti: Si</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </header>
@@ -138,8 +144,16 @@ export default {
                     background-color: rgba(0, 0, 0, 0.8);
                     border: 1px solid white;
                     color: white;
-                    top: 55px;
+                }
+
+                div.notifications {
+                    top: 70px;
                     right: 70px;
+                }
+
+                div.profile-menu {
+                    top: 70px;
+                    right: 100px;
                 }
 
                 div.notifications {
@@ -158,5 +172,32 @@ export default {
                 }
             }
         }
+    }
+
+    .input-translate-enter-active,
+    .input-translate-leave-active,
+    .notifications-translate-enter-active,
+    .notifications-translate-leave-active,
+    .profile-translate-enter-active,
+    .profile-translate-leave-active {
+        transition: all .3s;
+    }
+
+    .input-translate-enter-from,
+    .input-translate-leave-to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    .notifications-translate-enter-from,
+    .notifications-translate-leave-to {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    .profile-translate-enter-from,
+    .profile-translate-leave-to{
+        opacity: 0;
+        transform: translate(30px, -30px);
     }
 </style>
