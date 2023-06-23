@@ -60,6 +60,15 @@
                     <h3>Data di uscita</h3>
                     <span v-if="card.release_date">{{ dateFormatToItalian(card.release_date) }}</span>
                     <span v-else>{{ dateFormatToItalian(card.first_air_date) }}</span>
+
+                    <!-- Popularity -->
+                    <h3>Popolarità</h3>
+                    <span>{{ card.popularity }}</span>
+
+                    <!-- X Rated -->
+                    <h3>V.M. 18</h3>
+                    <span v-if="!card.adult">No</span>
+                    <span v-else="!card.adult">Si</span>
                 </div>
             </div>
 
@@ -217,6 +226,11 @@ export default {
                     h3 {
                         margin-bottom: .2rem;
                         color: goldenrod;
+                    }
+
+                    span {
+                        display: inline-block;
+                        margin-bottom: .8rem;
                     }
                 }
             }
