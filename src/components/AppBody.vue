@@ -32,7 +32,7 @@ export default {
             store.searchComplete = false;
             store.noResults = false;
             
-            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&include_adult=' + store.adultContent + 'true&query=' + store.searchQuery)
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&include_adult=' + store.adultContent + '&query=' + store.searchQuery)
                 .then(function (movieResponse) {
                     store.apiCall = movieResponse.data.results;
                 })
