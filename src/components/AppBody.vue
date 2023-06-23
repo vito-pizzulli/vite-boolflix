@@ -32,7 +32,6 @@ export default {
                     .then(function (movieResponse) {
                         store.searchComplete = false;
                         store.noResults = false;
-                        console.log(movieResponse.data.results);
                         store.apiCall = movieResponse.data.results;
                     })
                     .catch(function (error) {
@@ -41,9 +40,9 @@ export default {
 
             axios.get('https://api.themoviedb.org/3/search/tv?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&query=' + store.searchQuery)
                     .then(function (tvResponse) {
-                        console.log(tvResponse.data.results);
                         store.apiCall = store.apiCall.concat(tvResponse.data.results);
                         store.apiCall = store.apiCall.sort((a, b) => b["popularity"] - a["popularity"]);
+                        console.log(store.apiCall);
                         store.searchComplete = true;
 
                         if (store.apiCall.length === 0) {
