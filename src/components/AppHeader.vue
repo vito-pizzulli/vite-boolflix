@@ -10,15 +10,24 @@
         </div>
         <div class="header-half">
             <div id="app-searchbar">
-                <button @click="inputVisible = !inputVisible" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
+                <button @click="inputVisible = !inputVisible, notificationsVisible = false, profileMenuVisible = false" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
                 <input v-if="inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
-                <button v-if="inputVisible" @click="inputVisible = !inputVisible" class="cross-button"><font-awesome-icon icon="xmark" /></button>
-                <span class="icon" @click="notificationsVisible = !notificationsVisible"><font-awesome-icon icon="bell" /></span>
-                <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible">
+                <button v-if="inputVisible" @click="inputVisible = !inputVisible, notificationsVisible = false, profileMenuVisible = false" class="cross-button"><font-awesome-icon icon="xmark" /></button>
+                <span class="icon" @click="notificationsVisible = !notificationsVisible, inputVisible = false, profileMenuVisible = false"><font-awesome-icon icon="bell" /></span>
+                <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible, inputVisible = false, profileMenuVisible = false">
                     <span>Nessuna nuova notifica.</span>
                 </div>
-                <img src="/profile_pic.png" alt="Profile Pic">
-                <span class="icon"><font-awesome-icon icon="caret-down" /></span>
+                <img src="/profile_pic.png" alt="Profile Pic" @click="profileMenuVisible = !profileMenuVisible, inputVisible = false, notificationsVisible = false">
+                <span class="icon" @click="profileMenuVisible = !profileMenuVisible, inputVisible = false, notificationsVisible = false"><font-awesome-icon icon="caret-down" /></span>
+                <div v-if="profileMenuVisible" class="profile-menu">
+                    <ul>
+                        <li><font-awesome-icon icon="pencil" /> Gestisci i profili</li>
+                        <li><font-awesome-icon icon="user" /> Account</li>
+                        <li><font-awesome-icon icon="circle-question" /> Centro assistenza</li>
+                        <li v-if="!store.adultContent" @click="store.adultContent = !store.adultContent"><font-awesome-icon icon="ban" /> Contenuti per adulti: No</li>
+                        <li v-else @click="store.adultContent = !store.adultContent"><font-awesome-icon icon="ban" /> Contenuti per adulti: Si</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -33,7 +42,8 @@ export default {
         return {
             store,
             inputVisible: false,
-            notificationsVisible: false
+            notificationsVisible: false,
+            profileMenuVisible: false
         }
     }
 }
@@ -57,6 +67,7 @@ export default {
 
             img {
             width: 150px;
+            cursor: pointer;
             }
 
             nav#header-navbar ul {
@@ -109,14 +120,29 @@ export default {
                     cursor: pointer;
                 }
 
-                div.notifications {
+                div.notifications,
+                div.profile-menu {
                     position: absolute;
-                    background-color: rgba(0, 0, 0, 0.5);
+                    background-color: rgba(0, 0, 0, 0.8);
                     border: 1px solid white;
-                    padding: 1rem;
                     color: white;
                     top: 55px;
                     right: 70px;
+                }
+
+                div.notifications {
+                    padding: 1rem;
+                }
+
+                div.profile-menu ul {
+                    list-style: none;
+
+                    li {
+                        padding: 1rem;
+                        border-bottom: 1px solid white;
+                        cursor: pointer;
+                        width: 250px;
+                    }
                 }
             }
         }
