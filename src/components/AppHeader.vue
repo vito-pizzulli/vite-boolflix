@@ -9,6 +9,7 @@
             </nav>
         </div>
         <div class="header-half">
+            <img v-if="store.adultContent" src="/18.png" alt="18 Symbol Icon" class="x-content-symbol_icon">
             <div id="app-searchbar">
                 <button @click="inputVisible = !inputVisible, notificationsHide(), profileMenuHide()" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
                 <Transition name="input-translate">
@@ -86,6 +87,11 @@ export default {
             img {
             width: 150px;
             cursor: pointer;
+            }
+
+            img.x-content-symbol_icon {
+                width: 40px;
+                margin-right: 1rem;
             }
 
             nav#header-navbar ul {
