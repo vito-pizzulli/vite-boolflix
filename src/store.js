@@ -6,6 +6,7 @@ const store = reactive({
     searchedQuery: '',
     noResults: false,
     searchComplete: false,
+    adultContent: false,
     mediaPreviewVisible: false,
     navbarLinks: [
         {
