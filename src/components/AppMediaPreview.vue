@@ -86,6 +86,10 @@ export default {
         card: Object
     },
 
+    emits: {
+        ['closeMediaPreview']: null
+    },
+
     methods: {
         dateFormatToItalian(dateToFormat) {
             const date = new Date(dateToFormat);
@@ -246,8 +250,8 @@ export default {
                 color: white;
                 font-size: 1.5rem;
                 position: absolute;
-                top: 3%;
-                left: 94%;
+                top: 20px;
+                right: 20px;
             }
         }
     }
