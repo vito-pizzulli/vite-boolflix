@@ -1,18 +1,20 @@
 <template>
-    <div id="app-card" @click="toggleMediaPreview">
+    <div>
+        <div id="app-card" @click="toggleMediaPreview">
 
-        <!-- Poster and No Poster Found images  -->
-        <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342' + card.poster_path" alt="Poster Image" class="poster">
-        <img v-else src="/no_image.png" alt="No Poster Found Image" class="poster">
-        <div class="circle-play-icon">
-            <span><font-awesome-icon icon="circle-play" /></span>
+            <!-- Poster and No Poster Found images  -->
+            <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342' + card.poster_path" alt="Poster Image" class="poster">
+            <img v-else src="/no_image.png" alt="No Poster Found Image" class="poster">
+            <div class="circle-play-icon">
+                <span><font-awesome-icon icon="circle-play" /></span>
+            </div>
         </div>
-    </div>
 
-    <AppMediaPreview v-if="mediaPreviewVisible"
-        :card="card"
-        @closeMediaPreview="toggleMediaPreview"
-    />
+        <AppMediaPreview v-if="mediaPreviewVisible"
+            :card="card"
+            @closeMediaPreview="toggleMediaPreview"
+        />
+    </div>
 </template>
 
 <script>
