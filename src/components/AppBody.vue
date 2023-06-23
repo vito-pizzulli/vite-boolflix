@@ -2,6 +2,7 @@
     <div id="app-body">
         <AppHeader 
             @startSearch="getContentListByQuery"
+            @getHomeContent="getHomeContentList"
         />
         <AppMain />
     </div>
@@ -54,6 +55,27 @@ export default {
                 })
 
                 store.searchedQuery = store.searchQuery
+        },
+
+        getHomeContentList() {
+            axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&query=a')
+                .then(function (movieResponse) {
+                    store.apiCall = movieResponse.data.results;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+
+            axios.get('https://api.themoviedb.org/3/search/tv?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&query=b')
+                .then(function (tvResponse) {
+                    store.apiCall = store.apiCall.concat(tvResponse.data.results);
+                    store.apiCall = store.apiCall.sort((a, b) => b["popularity"] - a["popularity"]);
+                    console.log(store.apiCall);
+                    store.searchComplete = true;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
         }
     },
 

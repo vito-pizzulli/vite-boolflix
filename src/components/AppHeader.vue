@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header-half">
-            <img src="/netflix_logo.png" alt="Netflix Logo">
+            <img src="/netflix_logo.png" alt="Netflix Logo" @click="$emit('getHomeContent')">
             <nav id="header-navbar">
                 <ul>
                     <li v-for="link in store.navbarLinks"><a :href="link.link">{{ link.text }}</a></li>
