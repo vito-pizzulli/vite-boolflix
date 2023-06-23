@@ -3,32 +3,9 @@
 
         <!-- Poster and No Poster Found images  -->
         <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w342' + card.poster_path" alt="Poster Image" class="poster">
-        <img v-else src="/public/no_image.png" alt="No Poster Found Image" class="poster">
-
-        <div class="element-info">
-            <!-- Property "title" for Movies, "name" for TV Series -->
-            <h1 v-if="card.title">{{ card.title }}</h1>
-            <h1 v-else>{{ card.name }}</h1>
-
-            <!-- Property "original_title" for Movies, "original_name" for TV Series -->
-            <h2 v-if="card.original_title">{{ card.original_title }}</h2>
-            <h2 v-else>{{ card.original_name }}</h2>
-
-            <!-- Language flags with correction if missing or value slightly different -->
-            <span v-if="(card.original_language === 'en')" class="fi fi-gb"></span>
-            <span v-else-if="(card.original_language === 'ko')" class="fi fi-kr"></span>
-            <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
-            <span v-else-if="(card.original_language === 'cs')" class="fi fi-cz"></span>
-            <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
-            <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
-            <span v-else :class="'fi fi-' + card.original_language"></span>
-
-            <!-- Rating displayed in stars (1 to 5) -->
-            <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
-            <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
-
-            <!-- Overview -->
-            <p>{{ card.overview }}</p>
+        <img v-else src="/no_image.png" alt="No Poster Found Image" class="poster">
+        <div class="circle-play-icon">
+            <span><font-awesome-icon icon="circle-play" /></span>
         </div>
     </div>
 
@@ -80,45 +57,30 @@ export default {
         overflow-y: hidden;
         border-radius: 10px;
 
-        img.poster {
-            position: absolute;
-            z-index: 1;
-            transition: all .5s ease;
-
-            &:hover {
-                opacity: 0;
-            }
+        &:hover div.circle-play-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 1;
         }
 
-        div.element-info {
-            padding: 1rem;
+        img.poster {
+            position: absolute;
+        }
 
-            img.flag-error {
-                width: 25px;
-            }
+        div.circle-play-icon {
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all .3s;
 
-            h1 {
-            font-size: 1.3rem;
-            }
-
-            h2 {
-                font-size: .9rem;
-            }
-
-            h1, h2, span, p {
-                margin: .3rem 0;
-            }
-
-            p {
-                font-size: .79rem;
-            }
-
-            span.star {
-                color: goldenrod;
-            }
-
-            span.fi {
-                margin-right: 1rem;
+            span {
+                font-size: 5rem;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
     }
