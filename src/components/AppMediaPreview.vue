@@ -18,12 +18,6 @@
                     <h1 v-if="card.title">{{ card.title }}</h1>
                     <h1 v-else>{{ card.name }}</h1>
 
-                    <!-- Rating displayed in stars (1 to 5) -->
-                    <div class="rating">
-                        <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
-                        <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span><br>
-                    </div>
-
                     <!-- Media original title - Property "title" for Movies, "name" for TV Series -->
                     <h2 v-if="card.original_title">{{ card.original_title }}</h2>
                     <h2 v-else>{{ card.original_name }}</h2>
@@ -36,6 +30,13 @@
                     <span v-else-if="(card.original_language === 'zh')" class="fi fi-cn"></span>
                     <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
                     <span v-else :class="'fi fi-' + card.original_language"></span>
+
+                    <!-- Rating displayed in stars (1 to 5) and number of votes -->
+                    <div class="rating">
+                        <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
+                        <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
+                        <span class="votes-number">{{ card.vote_count }}</span>
+                    </div>
 
                     <!-- Media play Button -->
                     <button class="play"><font-awesome-icon icon="play" /> Riproduci</button>
@@ -55,6 +56,10 @@
 
                 <div class="element-info-right">
                     
+                    <!-- Release date - Property "release_date" for Movies, "first_air_date" for TV Series -->
+                    <h3>Data di uscita</h3>
+                    <span v-if="card.release_date">{{ dateFormatToItalian(card.release_date) }}</span>
+                    <span v-else>{{ dateFormatToItalian(card.first_air_date) }}</span>
                 </div>
             </div>
 
@@ -69,6 +74,16 @@ export default {
 
     props: {
         card: Object
+    },
+
+    methods: {
+        dateFormatToItalian(dateToFormat) {
+            const date = new Date(dateToFormat);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+}
     }
 }
 </script>
@@ -110,21 +125,26 @@ export default {
                 div.element-title {
                     width: 100%;
                     position: absolute;
-                    top: 60%;
+                    bottom: 0%;
                     left: 2%;
+                    z-index: 1;
 
                     h1, h2 {
                         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-                        display: inline;
                         margin-right: 1rem;
                     }
 
                     h1 {
-                        font-size: 2.1rem;
+                        font-size: 2.5rem;
+                    }
+
+                    h2 {
+                        display: inline;
                     }
 
                     span.fi {
                         vertical-align: text-top;
+                        margin-right: 1rem;
                     }
 
                     img.flag-error {
@@ -137,14 +157,13 @@ export default {
                         padding: .5rem;
                         border-radius: 20px;
 
-                        span.star {
+                        span.star,
+                        span.votes-number {
                             color: goldenrod;
-                            display: inline;
                         }
 
-                        span.star,
-                        span.empty-star {
-                            display: inline-block;
+                        span.votes-number {
+                            margin-left: 1rem;
                         }
                     }
 
@@ -156,6 +175,7 @@ export default {
                         font-size: 1.5rem;
                         border: none;
                         border-radius: 10px;
+                        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
                     }
                 }
 
@@ -171,23 +191,33 @@ export default {
                     position: absolute;
                     background-color: #181818;
                     bottom: 0;
+                    z-index: 0;
                 }
             }
 
             div.element-info {
                 @include flex(row, start, start, no-wrap);
-                padding: 2rem;
+                padding: 1rem 2rem 2rem;
 
                 div.element-info-left {
                     width: 70%;
+                    z-index: 1;
 
                     h3 {
                         margin-bottom: .5rem;
+                        color: goldenrod;
                     }
                 }
 
                 div.element-info-right {
+                    z-index: 1;
                     width: 30%;
+                    padding: 2rem;
+
+                    h3 {
+                        margin-bottom: .2rem;
+                        color: goldenrod;
+                    }
                 }
             }
 
