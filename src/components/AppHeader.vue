@@ -13,7 +13,10 @@
                 <button @click="inputVisible = !inputVisible" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
                 <input v-if="inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
                 <button v-if="inputVisible" @click="inputVisible = !inputVisible" class="cross-button"><font-awesome-icon icon="xmark" /></button>
-                <span class="icon"><font-awesome-icon icon="bell" /></span>
+                <span class="icon" @click="notificationsVisible = !notificationsVisible"><font-awesome-icon icon="bell" /></span>
+                <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible">
+                    <span>Nessuna nuova notifica.</span>
+                </div>
                 <img src="/profile_pic.png" alt="Profile Pic">
                 <span class="icon"><font-awesome-icon icon="caret-down" /></span>
             </div>
@@ -29,7 +32,8 @@ export default {
     data() {
         return {
             store,
-            inputVisible: false
+            inputVisible: false,
+            notificationsVisible: false
         }
     }
 }
@@ -83,6 +87,7 @@ export default {
                     border: none;
                     font-size: 1.2rem;
                     margin-right: 1rem;
+                    cursor: pointer;
                 }
 
                 button.cross-button {
@@ -101,6 +106,17 @@ export default {
                     display: inline-block;
                     margin: 0 1rem;
                     font-size: 1.2rem;
+                    cursor: pointer;
+                }
+
+                div.notifications {
+                    position: absolute;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    border: 1px solid white;
+                    padding: 1rem;
+                    color: white;
+                    top: 55px;
+                    right: 70px;
                 }
             }
         }
