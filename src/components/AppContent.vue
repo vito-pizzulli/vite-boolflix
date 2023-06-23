@@ -7,7 +7,7 @@
         </TransitionGroup>
     </div>
     <h2 v-if="(store.noResults && store.searchedQuery)">Nessun risultato per la tua ricerca di "{{ store.searchedQuery }}".</h2>
-    <h2 v-else>Inserisci il nome di un film o di una serie TV.</h2>
+    <h2 v-else-if="store.searchedQuery.length === 0">Inserisci il nome di un film o di una serie TV.</h2>
 </template>
 
 <script>
