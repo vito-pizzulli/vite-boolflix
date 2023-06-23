@@ -29,10 +29,11 @@ export default {
 
     methods: {
         getContentListByQuery() {
+            store.searchComplete = false;
+            store.noResults = false;
+            
             axios.get('https://api.themoviedb.org/3/search/movie?api_key=67aa46a4e4cc94fee02d3448ee99b726&language=it-IT&include_adult=' + store.adultContent + 'true&query=' + store.searchQuery)
                 .then(function (movieResponse) {
-                    store.searchComplete = false;
-                    store.noResults = false;
                     store.apiCall = movieResponse.data.results;
                 })
                 .catch(function (error) {
