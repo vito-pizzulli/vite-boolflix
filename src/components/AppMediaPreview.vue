@@ -1,22 +1,34 @@
 <template>
+
+    <!-- Transparent black background -->
     <div class="media-preview-background" @click="$emit('closeMediaPreview')"></div>
+
+    <!-- Media preview container -->
     <div id="app-media-preview">
         <div class="container">
-
             <div class="element-backdrop">
-                <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w1280' + card.backdrop_path" alt="Backdrop Image">
-                <img v-else src="/public/no_image.png" alt="No Backdrop Found Image">
-                <div class="blur-effect"></div>
-            </div>
 
-            <div class="element-info">
-                <div class="element-info-left">
+                <!-- Backdrop and No Backdrop Found images  -->
+                <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w1280' + card.backdrop_path" alt="Backdrop Image">
+                <img v-else src="/no_backdrop.png" alt="No Backdrop Found Image">
+
+                <div class="element-title">
+
+                    <!-- Media title - Property "title" for Movies, "name" for TV Series -->
                     <h1 v-if="card.title">{{ card.title }}</h1>
                     <h1 v-else>{{ card.name }}</h1>
 
+                    <!-- Rating displayed in stars (1 to 5) -->
+                    <div class="rating">
+                        <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
+                        <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span><br>
+                    </div>
+
+                    <!-- Media original title - Property "title" for Movies, "name" for TV Series -->
                     <h2 v-if="card.original_title">{{ card.original_title }}</h2>
                     <h2 v-else>{{ card.original_name }}</h2>
 
+                    <!-- Language flags with correction if missing or value slightly different -->
                     <span v-if="(card.original_language === 'en')" class="fi fi-gb"></span>
                     <span v-else-if="(card.original_language === 'ko')" class="fi fi-kr"></span>
                     <span v-else-if="(card.original_language === 'ja')" class="fi fi-jp"></span>
@@ -25,12 +37,24 @@
                     <img class="flag-error" v-else-if="(card.original_language === 'xx')" src="../../public/error.png">
                     <span v-else :class="'fi fi-' + card.original_language"></span>
 
-                    <span class="star"><font-awesome-icon icon="fa-solid fa-star" v-for="star in Math.ceil(card.vote_average / 2)" /></span>
-                    <span class="empty-star"><font-awesome-icon icon="fa-solid fa-star" v-for="emptyStar in 5 - (Math.ceil(card.vote_average / 2))" /></span>
+                    <!-- Media play Button -->
+                    <button class="play"><font-awesome-icon icon="play" /> Riproduci</button>
+                </div>
+
+                <!-- Blur effect container -->
+                <div class="blur-effect"></div>
+            </div>
+
+            <div class="element-info">
+                <div class="element-info-left">
+
+                    <!-- Overview -->
+                    <h3>Trama</h3>
+                    <p>{{ card.overview }}</p>
                 </div>
 
                 <div class="element-info-right">
-                    <p>{{ card.overview }}</p>
+                    
                 </div>
             </div>
 
@@ -83,15 +107,67 @@ export default {
             div.element-backdrop {
                 position: relative;
 
+                div.element-title {
+                    width: 100%;
+                    position: absolute;
+                    top: 60%;
+                    left: 2%;
+
+                    h1, h2 {
+                        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+                        display: inline;
+                        margin-right: 1rem;
+                    }
+
+                    h1 {
+                        font-size: 2.1rem;
+                    }
+
+                    span.fi {
+                        vertical-align: text-top;
+                    }
+
+                    img.flag-error {
+                        width: 25px;
+                    }
+
+                    div.rating {
+                        display: inline;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        padding: .5rem;
+                        border-radius: 20px;
+
+                        span.star {
+                            color: goldenrod;
+                            display: inline;
+                        }
+
+                        span.star,
+                        span.empty-star {
+                            display: inline-block;
+                        }
+                    }
+
+                    button.play {
+                        display: block;
+                        padding: .5rem 3rem;
+                        margin: 1rem 0;
+                        background-color: white;
+                        font-size: 1.5rem;
+                        border: none;
+                        border-radius: 10px;
+                    }
+                }
+
                 img {
                     width: 100%;
                 }
 
                 div.blur-effect {
                     width: 110%;
-                    height: 100px;
-                    transform: translate(-5%, 50%);
-                    filter: blur(.9rem);
+                    height: 50px;
+                    transform: translate(-5%, 20px);
+                    filter: blur(.5rem);
                     position: absolute;
                     background-color: #181818;
                     bottom: 0;
@@ -99,17 +175,19 @@ export default {
             }
 
             div.element-info {
-                @include flex(row, space-between, start, no-wrap);
-                padding: 1rem;
+                @include flex(row, start, start, no-wrap);
+                padding: 2rem;
 
                 div.element-info-left {
-                    width: 50%;
-                    padding: .5rem;
+                    width: 70%;
+
+                    h3 {
+                        margin-bottom: .5rem;
+                    }
                 }
 
                 div.element-info-right {
-                    width: 50%;
-                    padding: 2rem .5rem 0;
+                    width: 30%;
                 }
             }
 
