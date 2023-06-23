@@ -167,7 +167,7 @@ export default {
 
                     div.rating {
                         display: inline;
-                        background-color: rgba(0, 0, 0, 0.5);
+                        background-color: rgba(0, 0, 0, 0.7);
                         padding: .5rem;
                         border-radius: 20px;
 
