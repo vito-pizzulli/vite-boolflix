@@ -10,15 +10,15 @@
         </div>
         <div class="header-half">
             <div id="app-searchbar">
-                <button @click="inputVisible = !inputVisible, notificationsVisible = false, profileMenuVisible = false" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
+                <button @click="inputVisible = !inputVisible, notificationsHide(), profileMenuHide()" class="search-button"><font-awesome-icon icon="magnifying-glass" /></button>
                 <input v-if="inputVisible" type="text" v-model="store.searchQuery" @keyup.enter="$emit('startSearch')" placeholder="Titolo del film o della serie TV">
-                <button v-if="inputVisible" @click="inputVisible = !inputVisible, notificationsVisible = false, profileMenuVisible = false" class="cross-button"><font-awesome-icon icon="xmark" /></button>
-                <span class="icon" @click="notificationsVisible = !notificationsVisible, inputVisible = false, profileMenuVisible = false"><font-awesome-icon icon="bell" /></span>
-                <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible, inputVisible = false, profileMenuVisible = false">
+                <button v-if="inputVisible" @click="inputVisible = !inputVisible, notificationsHide(), profileMenuHide()" class="cross-button"><font-awesome-icon icon="xmark" /></button>
+                <span class="icon" @click="notificationsVisible = !notificationsVisible, inputHide(), profileMenuHide()"><font-awesome-icon icon="bell" /></span>
+                <div v-if="notificationsVisible" class="notifications" @click="notificationsVisible = !notificationsVisible, inputHide(), profileMenuHide()">
                     <span>Nessuna nuova notifica.</span>
                 </div>
-                <img src="/profile_pic.png" alt="Profile Pic" @click="profileMenuVisible = !profileMenuVisible, inputVisible = false, notificationsVisible = false">
-                <span class="icon" @click="profileMenuVisible = !profileMenuVisible, inputVisible = false, notificationsVisible = false"><font-awesome-icon icon="caret-down" /></span>
+                <img src="/profile_pic.png" alt="Profile Pic" @click="profileMenuVisible = !profileMenuVisible, inputHide(), notificationsHide()">
+                <span class="icon" @click="profileMenuVisible = !profileMenuVisible, inputHide(), notificationsHide()"><font-awesome-icon icon="caret-down" /></span>
                 <div v-if="profileMenuVisible" class="profile-menu">
                     <ul>
                         <li><font-awesome-icon icon="pencil" /> Gestisci i profili</li>
@@ -44,6 +44,18 @@ export default {
             inputVisible: false,
             notificationsVisible: false,
             profileMenuVisible: false
+        }
+    },
+
+    methods: {
+        inputHide() {
+            this.inputVisible = false
+        },
+        notificationsHide() {
+            this.notificationsVisible = false
+        },
+        profileMenuHide() {
+            this.profileMenuVisible = false
         }
     }
 }
