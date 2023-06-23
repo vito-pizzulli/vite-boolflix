@@ -9,7 +9,7 @@
             <div class="element-backdrop">
 
                 <!-- Backdrop and No Backdrop Found images  -->
-                <img v-if="card.poster_path" :src="'http://image.tmdb.org/t/p/w1280' + card.backdrop_path" alt="Backdrop Image">
+                <img v-if="card.backdrop_path" :src="'http://image.tmdb.org/t/p/w1280' + card.backdrop_path" alt="Backdrop Image">
                 <img v-else src="/no_backdrop.png" alt="No Backdrop Found Image">
 
                 <div class="element-title">
@@ -51,7 +51,8 @@
 
                     <!-- Overview -->
                     <h3>Trama</h3>
-                    <p>{{ card.overview }}</p>
+                    <p v-if="card.overview">{{ card.overview }}</p>
+                    <p v-else>Trama non presente.</p>
                 </div>
 
                 <div class="element-info-right">
